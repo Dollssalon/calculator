@@ -1,46 +1,138 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Dolls Salon — Hair Extensions Price Calculator</title>
+<meta name="description" content="Interactive price calculator for tape, nano, tiny weft and combo options.">
 <style>
-  :root{--bg:#fdf8f7; --card:#ffffff; --muted:#a68d8d; --text:#4a3f3f; --accent:#e6b7b7; --accent-2:#f3d6d6; --border:#ead6d6;}
-  *{box-sizing:border-box} body{margin:0;font-family:Inter,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:linear-gradient(180deg,#fff 0%, var(--bg) 100%); color:var(--text)}
-  .wrap{max-width:900px;margin:28px auto;padding:18px} .card{background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:0 10px 30px rgba(150,120,120,.12); padding:20px}
-  h1{font-size:clamp(22px,3vw,30px);margin:0 0 6px;font-weight:800} p.lead{margin:0 0 16px;color:var(--muted)}
-  .grid{display:grid;gap:14px;grid-template-columns:1fr} @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
-  label{display:block;font-weight:700;margin-bottom:6px;color:#7c6969} select{width:100%;padding:12px 14px;border-radius:12px;background:#fff;color:var(--text); border:1px solid var(--border)}
-  .price{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,var(--accent-2),#fff);border:1px solid var(--accent);border-radius:16px;padding:16px 18px}
-  .price .big{font-size:clamp(26px,4vw,36px);font-weight:900} .row{display:flex;gap:10px;flex-wrap:wrap}
-  .pill{padding:8px 10px;border-radius:999px;background:#fff;border:1px solid var(--border); color:var(--muted);font-size:13px} .muted{color:var(--muted)}
-  .share{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px} button.btn{background:#fff;border:1px solid var(--border);color:var(--text);border-radius:12px;padding:10px 14px;cursor:pointer}
-</style></head>
+  :root {--bg:#fdf8f7; --card:#ffffff; --muted:#a68d8d; --text:#4a3f3f; --accent:#e6b7b7; --accent-2:#f3d6d6; --border:#ead6d6;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+       background:linear-gradient(180deg,#fff 0%, var(--bg) 100%); color:var(--text)}
+  .wrap{max-width:900px;margin:28px auto;padding:18px}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:18px;
+        box-shadow:0 10px 30px rgba(150,120,120,.12); padding:20px}
+  h1{font-size:clamp(22px,3vw,30px);margin:0 0 6px;font-weight:800}
+  p.lead{margin:0 0 16px;color:var(--muted)}
+  .grid{display:grid;gap:14px;grid-template-columns:1fr}
+  @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
+  label{display:block;font-weight:700;margin-bottom:6px;color:#7c6969}
+  select{width:100%;padding:12px 14px;border-radius:12px;background:#fff;color:var(--text);
+         border:1px solid var(--border)}
+  .price{display:flex;align-items:center;justify-content:space-between;
+         background:linear-gradient(180deg,var(--accent-2),#fff);border:1px solid var(--accent);
+         border-radius:16px;padding:16px 18px;margin-top:6px}
+  .price .big{font-size:clamp(26px,4vw,36px);font-weight:900}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .pill{padding:8px 10px;border-radius:999px;background:#fff;border:1px solid var(--border);
+        color:var(--muted);font-size:13px}
+  .share{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  button.btn{background:#fff;border:1px solid var(--border);color:var(--text);border-radius:12px;padding:10px 14px;cursor:pointer}
+  .note{font-size:13px;color:var(--muted);margin-top:8px;text-align:center;font-style:italic}
+  footer{margin-top:18px;font-size:12px;color:var(--muted)}
+</style>
+</head>
 <body>
-<div class="wrap"><div class="card">
-  <h1>The Dolls Salon — Hair Extensions Price Calculator</h1><p class="lead">Pick product, length and weight to see your final price.</p>
-  <div class="grid">
-    <div><label>Product</label><select id="product"></select></div>
-    <div><label>Length (inches)</label><select id="length"></select></div>
-    <div><label>Actual weight</label><select id="weight"></select></div>
-    <div><label>&nbsp;</label><div class="price"><div><div class="muted">Final price</div><div id="price" class="big">£—</div></div><div class="row"><span class="pill" id="detail-1"></span><span class="pill" id="detail-2"></span><span class="pill" id="detail-3"></span></div></div></div>
+<div class="wrap">
+  <div class="card">
+    <h1>The Dolls Salon — Hair Extensions Price Calculator</h1>
+    <p class="lead">Pick product, length and weight to see your final price.</p>
+
+    <div class="grid">
+      <div>
+        <label for="product">Product</label>
+        <select id="product"></select>
+      </div>
+      <div>
+        <label for="length">Length (inches)</label>
+        <select id="length"></select>
+      </div>
+      <div>
+        <label for="weight">Actual weight</label>
+        <select id="weight"></select>
+      </div>
+      <div>
+        <label>&nbsp;</label>
+        <div class="price">
+          <div>
+            <div class="pill">Final price</div>
+            <div id="price" class="big">£—</div>
+          </div>
+          <div class="row">
+            <span class="pill" id="detail-1"></span>
+            <span class="pill" id="detail-2"></span>
+            <span class="pill" id="detail-3"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="share">
+      <button class="btn" id="copyLink">Copy shareable link</button>
+      <button class="btn" id="copyQuote">Copy price text</button>
+    </div>
+    <div class="note">Includes Fitting, Cut &amp; Style</div>
+
+    <footer>© The Dolls Salon</footer>
   </div>
-  <div class="share"><button class="btn" id="copyLink">Copy shareable link</button><button class="btn" id="copyQuote">Copy price text</button></div>
-</div></div>
+</div>
+
 <script>
-const ROWS = [{"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 98, "Final price (\u00a3)": 299.42}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 126, "Final price (\u00a3)": 333.54}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 154, "Final price (\u00a3)": 367.66}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 182, "Final price (\u00a3)": 401.78}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 196, "Final price (\u00a3)": 418.84}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 96, "Final price (\u00a3)": 324.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 112, "Final price (\u00a3)": 348.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 144, "Final price (\u00a3)": 396.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 176, "Final price (\u00a3)": 444.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 192, "Final price (\u00a3)": 468.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 108, "Final price (\u00a3)": 396.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 126, "Final price (\u00a3)": 432.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 144, "Final price (\u00a3)": 468.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 180, "Final price (\u00a3)": 540.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 198, "Final price (\u00a3)": 576.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 108, "Final price (\u00a3)": 270.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 126, "Final price (\u00a3)": 295.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 144, "Final price (\u00a3)": 320.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 180, "Final price (\u00a3)": 370.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 198, "Final price (\u00a3)": 395.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 110, "Final price (\u00a3)": 300.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 154, "Final price (\u00a3)": 372.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 176, "Final price (\u00a3)": 408.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 198, "Final price (\u00a3)": 444.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 100, "Final price (\u00a3)": 328.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 125, "Final price (\u00a3)": 380.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 150, "Final price (\u00a3)": 432.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 175, "Final price (\u00a3)": 484.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 200, "Final price (\u00a3)": 536.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 120, "Final price (\u00a3)": 298.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 148, "Final price (\u00a3)": 332.12}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 180, "Final price (\u00a3)": 372.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 194, "Final price (\u00a3)": 389.06}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 120, "Final price (\u00a3)": 368.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 152, "Final price (\u00a3)": 416.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 180, "Final price (\u00a3)": 477.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 196, "Final price (\u00a3)": 501.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 20, "Achieved weight (g)": 130, "Final price (\u00a3)": 430.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 20, "Achieved weight (g)": 148, "Final price (\u00a3)": 466.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 20, "Achieved weight (g)": 195, "Final price (\u00a3)": 570.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 120, "Final price (\u00a3)": 298.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 156, "Final price (\u00a3)": 348.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 180, "Final price (\u00a3)": 372.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 198, "Final price (\u00a3)": 397.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 120, "Final price (\u00a3)": 368.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 142, "Final price (\u00a3)": 404.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 180, "Final price (\u00a3)": 477.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 202, "Final price (\u00a3)": 513.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 20, "Achieved weight (g)": 130, "Final price (\u00a3)": 430.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 20, "Achieved weight (g)": 155, "Final price (\u00a3)": 482.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 20, "Achieved weight (g)": 195, "Final price (\u00a3)": 570.0}, {"Product choice": "weft & nano", "Length (inches)": 16, "Achieved weight (g)": 220, "Final price (\u00a3)": 390.0}, {"Product choice": "weft & nano", "Length (inches)": 16, "Achieved weight (g)": 330, "Final price (\u00a3)": 510.0}, {"Product choice": "weft & nano", "Length (inches)": 18, "Achieved weight (g)": 260, "Final price (\u00a3)": 532.0}, {"Product choice": "weft & nano", "Length (inches)": 18, "Achieved weight (g)": 390, "Final price (\u00a3)": 723.0}, {"Product choice": "weft & nano", "Length (inches)": 20, "Achieved weight (g)": 300, "Final price (\u00a3)": 710.0}, {"Product choice": "weft & nano", "Length (inches)": 20, "Achieved weight (g)": 450, "Final price (\u00a3)": 990.0}, {"Product choice": "weft & tape", "Length (inches)": 16, "Achieved weight (g)": 220, "Final price (\u00a3)": 390.0}, {"Product choice": "weft & tape", "Length (inches)": 16, "Achieved weight (g)": 330, "Final price (\u00a3)": 510.0}, {"Product choice": "weft & tape", "Length (inches)": 18, "Achieved weight (g)": 260, "Final price (\u00a3)": 532.0}, {"Product choice": "weft & tape", "Length (inches)": 18, "Achieved weight (g)": 390, "Final price (\u00a3)": 723.0}, {"Product choice": "weft & tape", "Length (inches)": 20, "Achieved weight (g)": 300, "Final price (\u00a3)": 710.0}, {"Product choice": "weft & tape", "Length (inches)": 20, "Achieved weight (g)": 450, "Final price (\u00a3)": 990.0}];
+const ROWS = [{"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 98, "Final price (\u00a3)": 299.42}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 126, "Final price (\u00a3)": 333.54}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 154, "Final price (\u00a3)": 367.66}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 182, "Final price (\u00a3)": 401.78}, {"Product choice": "nano", "Length (inches)": 16, "Achieved weight (g)": 196, "Final price (\u00a3)": 418.84}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 96, "Final price (\u00a3)": 324.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 112, "Final price (\u00a3)": 348.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 144, "Final price (\u00a3)": 396.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 176, "Final price (\u00a3)": 444.0}, {"Product choice": "nano", "Length (inches)": 18, "Achieved weight (g)": 192, "Final price (\u00a3)": 468.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 108, "Final price (\u00a3)": 396.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 126, "Final price (\u00a3)": 432.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 144, "Final price (\u00a3)": 468.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 180, "Final price (\u00a3)": 540.0}, {"Product choice": "nano", "Length (inches)": 20, "Achieved weight (g)": 198, "Final price (\u00a3)": 576.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 108, "Final price (\u00a3)": 270.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 126, "Final price (\u00a3)": 295.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 144, "Final price (\u00a3)": 320.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 180, "Final price (\u00a3)": 370.0}, {"Product choice": "tape", "Length (inches)": 16, "Achieved weight (g)": 198, "Final price (\u00a3)": 395.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 110, "Final price (\u00a3)": 300.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 154, "Final price (\u00a3)": 372.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 176, "Final price (\u00a3)": 408.0}, {"Product choice": "tape", "Length (inches)": 18, "Achieved weight (g)": 198, "Final price (\u00a3)": 444.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 100, "Final price (\u00a3)": 328.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 125, "Final price (\u00a3)": 380.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 150, "Final price (\u00a3)": 432.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 175, "Final price (\u00a3)": 484.0}, {"Product choice": "tape", "Length (inches)": 20, "Achieved weight (g)": 200, "Final price (\u00a3)": 536.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 120, "Final price (\u00a3)": 298.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 148, "Final price (\u00a3)": 332.12}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 180, "Final price (\u00a3)": 372.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 16, "Achieved weight (g)": 194, "Final price (\u00a3)": 389.06}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 120, "Final price (\u00a3)": 368.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 152, "Final price (\u00a3)": 416.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 180, "Final price (\u00a3)": 477.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 18, "Achieved weight (g)": 196, "Final price (\u00a3)": 501.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 20, "Achieved weight (g)": 130, "Final price (\u00a3)": 430.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 20, "Achieved weight (g)": 148, "Final price (\u00a3)": 466.0}, {"Product choice": "tiny weft & nano", "Length (inches)": 20, "Achieved weight (g)": 195, "Final price (\u00a3)": 570.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 120, "Final price (\u00a3)": 298.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 156, "Final price (\u00a3)": 348.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 180, "Final price (\u00a3)": 372.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 16, "Achieved weight (g)": 198, "Final price (\u00a3)": 397.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 120, "Final price (\u00a3)": 368.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 142, "Final price (\u00a3)": 404.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 180, "Final price (\u00a3)": 477.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 18, "Achieved weight (g)": 202, "Final price (\u00a3)": 513.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 20, "Achieved weight (g)": 130, "Final price (\u00a3)": 430.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 20, "Achieved weight (g)": 155, "Final price (\u00a3)": 482.0}, {"Product choice": "tiny weft & tape", "Length (inches)": 20, "Achieved weight (g)": 195, "Final price (\u00a3)": 570.0}, {"Product choice": "weft & nano", "Length (inches)": 16, "Achieved weight (g)": 124, "Final price (\u00a3)": 287.06}, {"Product choice": "weft & nano", "Length (inches)": 16, "Achieved weight (g)": 138, "Final price (\u00a3)": 304.12}, {"Product choice": "weft & nano", "Length (inches)": 18, "Achieved weight (g)": 146, "Final price (\u00a3)": 365.0}, {"Product choice": "weft & nano", "Length (inches)": 18, "Achieved weight (g)": 162, "Final price (\u00a3)": 389.0}, {"Product choice": "weft & nano", "Length (inches)": 20, "Achieved weight (g)": 168, "Final price (\u00a3)": 466.0}, {"Product choice": "weft & nano", "Length (inches)": 20, "Achieved weight (g)": 186, "Final price (\u00a3)": 502.0}, {"Product choice": "weft & tape", "Length (inches)": 16, "Achieved weight (g)": 128, "Final price (\u00a3)": 295.0}, {"Product choice": "weft & tape", "Length (inches)": 16, "Achieved weight (g)": 146, "Final price (\u00a3)": 320.0}, {"Product choice": "weft & tape", "Length (inches)": 18, "Achieved weight (g)": 152, "Final price (\u00a3)": 377.0}, {"Product choice": "weft & tape", "Length (inches)": 18, "Achieved weight (g)": 174, "Final price (\u00a3)": 413.0}, {"Product choice": "weft & tape", "Length (inches)": 20, "Achieved weight (g)": 175, "Final price (\u00a3)": 482.0}, {"Product choice": "weft & tape", "Length (inches)": 20, "Achieved weight (g)": 200, "Final price (\u00a3)": 534.0}];
 const choices = ["tape","tiny weft & nano","tiny weft & tape","weft & tape","weft & nano","nano"];
 const lengths=[16,18,20];
-function buildMap(){const m={}; for(const r of ROWS){const k=`${r["Product choice"]}|${r["Length (inches)"]}`; (m[k]??=[]).push({achieved:r["Achieved weight (g)"], price:r["Final price (£)"]});} for(const k in m){m[k]=Array.from(new Map(m[k].map(x=>[x.achieved,x])).values()).sort((a,b)=>a.achieved-b.achieved);} return m;}
+
+function buildMap(){
+  const m={};
+  for(const r of ROWS){
+    const k=`${r["Product choice"]}|${r["Length (inches)"]}`;
+    (m[k]??=[]).push({achieved:r["Achieved weight (g)"], price:r["Final price (£)"]});
+  }
+  for(const k in m){
+    const seen=new Set(); const arr=[];
+    for(const x of m[k]){ const id=String(x.achieved); if(!seen.has(id)){seen.add(id); arr.push(x);} }
+    m[k]=arr.sort((a,b)=>a.achieved-b.achieved);
+  }
+  return m;
+}
 const MAP=buildMap();
+
 const $p=document.getElementById('product'),$l=document.getElementById('length'),$w=document.getElementById('weight'),$price=document.getElementById('price'),$d1=document.getElementById('detail-1'),$d2=document.getElementById('detail-2'),$d3=document.getElementById('detail-3');
+
 function opt(el,v,t){const o=document.createElement('option');o.value=v;o.textContent=t;el.appendChild(o);}
 function fillProducts(){$p.innerHTML='';choices.forEach(c=>opt($p,c,c));}
 function fillLengths(){$l.innerHTML='';lengths.forEach(L=>opt($l,String(L),`${L}"`));}
 function fillWeights(){$w.innerHTML='';const key=`${$p.value}|${$l.value}`; (MAP[key]||[]).forEach(r=>opt($w,String(r.achieved),`${r.achieved} g`));}
-function display(){const key=`${$p.value}|${$l.value}`; const arr=MAP[key]||[]; const row=arr.find(r=>String(r.achieved)===String($w.value)); if(!row){$price.textContent='£—';$d1.textContent='';$d2.textContent='';$d3.textContent='';return;} $price.textContent=`£${Number(row.price).toFixed(2)}`; $d1.textContent=`${$p.value}, ${$l.value}"`; $d2.textContent=`${$w.value} g`; $d3.textContent='incl. fitting';}
+function display(){
+  const key=`${$p.value}|${$l.value}`; const arr=MAP[key]||[]; const row=arr.find(r=>String(r.achieved)===String($w.value));
+  if(!row){$price.textContent='£—';$d1.textContent='';$d2.textContent='';$d3.textContent='';return;}
+  $price.textContent=`£${Number(row.price).toFixed(2)}`;
+  $d1.textContent=`${$p.value}, ${$l.value}"`;
+  $d2.textContent=`${$w.value} g`;
+  $d3.textContent='incl. fitting';
+}
 function init(){fillProducts();fillLengths();fillWeights(); if($w.options.length)$w.selectedIndex=0; display();}
 $p.addEventListener('change',()=>{fillWeights(); if($w.options.length)$w.selectedIndex=0; display();});
 $l.addEventListener('change',()=>{fillWeights(); if($w.options.length)$w.selectedIndex=0; display();});
 $w.addEventListener('change',display);
-document.addEventListener('click', async e=>{if(e.target.id==='copyLink'){const url=new URL(location.href); url.searchParams.set('product',$p.value);url.searchParams.set('length',$l.value);url.searchParams.set('weight',$w.value);try{await navigator.clipboard.writeText(url.toString());alert('Link copied!');}catch{prompt('Copy this link:',url.toString());}} if(e.target.id==='copyQuote'){const text=`The Dolls Salon Quote\n• Product: ${$p.value}\n• Length: ${$l.value}"\n• Weight: ${$w.value}g\n• Final price: ${$price.textContent}`; try{await navigator.clipboard.writeText(text);alert('Quote copied!');}catch{prompt('Copy this text:', text);}}});
+
+document.getElementById('copyLink').addEventListener('click', async () => {
+  const url=new URL(location.href);
+  url.searchParams.set('product',$p.value);
+  url.searchParams.set('length',$l.value);
+  url.searchParams.set('weight',$w.value);
+  try{await navigator.clipboard.writeText(url.toString()); alert('Link copied!');}
+  catch{prompt('Copy this link:', url.toString());}
+});
+document.getElementById('copyQuote').addEventListener('click', async () => {
+  const text=`The Dolls Salon Quote\n• Product: ${$p.value}\n• Length: ${$l.value}"\n• Weight: ${$w.value}g\n• Final price: ${$price.textContent}`;
+  try{await navigator.clipboard.writeText(text); alert('Quote copied!');}
+  catch{prompt('Copy this text:', text);}
+});
+
 init();
+(() => {const u=new URL(location.href); const p=u.searchParams.get('product'); const L=u.searchParams.get('length'); const w=u.searchParams.get('weight'); if(p)$p.value=p; if(L)$l.value=L; fillWeights(); if(w)$w.value=w; display(); })();
 </script>
-</body></html>
+</body>
+</html>
